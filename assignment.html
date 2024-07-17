@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaffyDB CRUD Operations</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/taffydb/2.7.3/taffy-min.js"></script>
+</head>
+<body>
+    <h1>hello</h1><h1>hello</h1>
+    <style>
+        #recordList{
+               position: absolute;
+               border: 2px solid black;
+               margin-top: -300px;
+               margin-left: 400px;
+               padding: 20px;
+        }
+        .he{
+            position: absolute;
+               margin-top: -330px;
+               margin-left: 400px;
+        }
+    </style>
+    <h1>TaffyDB CRUD Operations</h1>
+    
+    <script>
+        let db = TAFFY([
+            { id: 1, name: "India", state: "Uttar Pradesh", capital: "New Delhi" },
+            { id: 2, name: "USA", state: "California", capital: "Washington DC" },
+            { id: 3, name: "Germany", state: "Berlin", capital: "Berlin" }
+        ]);
+
+        function updateRecordList() {
+            let records = db().get();
+            let recordList = document.getElementById("recordList");
+            recordList.innerHTML = "";
+            records.forEach(function(record) {
+                let recordDiv = document.createElement("div");
+                recordDiv.textContent = `ID: ${record.id}, Name: ${record.name}, State: ${record.state}, Capital: ${record.capital}`;
+                recordList.appendChild(recordDiv);
+            });
+        }
+
+        function createRecord() {
+            let name = document.getElementById("name").value;
+            let state = document.getElementById("state").value;
+            let capital = document.getElementById("capital").value;
+
+            let id = db().max("id") + 1;
+            db.insert({ id: id, name: name, state: state, capital: capital });
+
+            updateRecordList();
+
+            document.getElementById("name").value = "";
+            document.getElementById("state").value = "";
+            document.getElementById("capital").value = "";
+        }
+
+        function readRecords() {
+            updateRecordList();
+        }
+
+        function updateRecord() {
+            let id = parseInt(document.getElementById("updateId").value);
+            let record = db({ id: id }).first();
+
+            if (record) {
+                let name = document.getElementById("updateName").value;
+                let state = document.getElementById("updateState").value;
+                let capital = document.getElementById("updateCapital").value;
+
+                db({ id: id }).update({ name: name, state: state, capital: capital });
+
+                updateRecordList();
+
+                document.getElementById("updateId").value = "";
+                document.getElementById("updateName").value = "";
+                document.getElementById("updateState").value = "";
+                document.getElementById("updateCapital").value = "";
+            } else {
+                alert("Record not found!");
+            }
+        }
+
+        function deleteRecord() {
+            let id = parseInt(document.getElementById("deleteId").value);
+            let record = db({ id: id }).first();
+
+            if (record) {
+                db({ id: id }).remove();
+
+                updateRecordList();
+
+                document.getElementById("deleteId").value = "";
+            } else {
+                alert("Record not found!");
+            }
+        }
+
+        function getRecordById() {
+            let id = parseInt(document.getElementById("recordId").value);
+            let record = db({ id: id }).first();
+
+            if (record) {
+                alert(`Name: ${record.name}, State: ${record.state}, Capital: ${record.capital}`);
+            } else {
+                alert("Record not found!");
+            }
+        }
+    </script>
+
+    <h2>Create Record</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state" required><br>
+    <label for="capital">Capital:</label>
+    <input type="text" id="capital" name="capital" required><br>
+    <button onclick="createRecord()">Create Record</button>
+
+    <h2>Update Record</h2>
+    <label for="updateId">ID of Record to Update:</label>
+    <input type="number" id="updateId" name="updateId" required><br>
+    <label for="updateName">New Name:</label>
+    <input type="text" id="updateName" name="updateName"><br>
+    <label for="updateState">New State:</label>
+    <input type="text" id="updateState" name="updateState"><br>
+    <label for="updateCapital">New Capital:</label>
+    <input type="text" id="updateCapital" name="updateCapital"><br>
+    <button onclick="updateRecord()">Update Record</button>
+
+    <h2>Delete Record</h2>
+    <label for="deleteId">ID of Record to Delete:</label>
+    <input type="number" id="deleteId" name="deleteId" required><br>
+    <button onclick="deleteRecord()">Delete Record</button>
+
+    <h2>Get Record by ID</h2>
+    <label for="recordId">Enter ID:</label>
+    <input type="number" id="recordId" name="recordId" required><br>
+    <button onclick="getRecordById()">Get Record</button>
+     <h1 class="he">All Record</h1>
+    <div id="recordList"></div>
+
+</body>
+</html>
