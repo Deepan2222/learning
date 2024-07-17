@@ -1,0 +1,70 @@
+Microsoft Windows [Version 10.0.22621.3880]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Git & GitHub>git clone https://github.com/Deepan2222/learning.git
+Cloning into 'learning'...
+warning: You appear to have cloned an empty repository.
+
+D:\Git & GitHub>git add .\assignment.html
+fatal: not a git repository (or any of the parent directories): .git
+
+D:\Git & GitHub>cd learning
+
+D:\Git & GitHub\learning>git add .\assignment.html
+
+D:\Git & GitHub\learning>git commit -m "feat: added a file to repo"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'droff@NEDUNCHEZHIYAN.(none)')
+
+D:\Git & GitHub\learning>git config --global user.name "Deepan2222"
+
+D:\Git & GitHub\learning>git config --global user.email "Deepanneduchezhiyan@gamil.com"
+
+D:\Git & GitHub\learning>git add .\assignment.html
+
+D:\Git & GitHub\learning>git commit -m "feat: added a file to repo"
+[main (root-commit) 919759a] feat: added a file to repo
+ 1 file changed, 147 insertions(+)
+ create mode 100644 assignment.html
+
+D:\Git & GitHub\learning>git push
+fatal: User cancelled dialog.
+Username for 'https://github.com': Deepan2222
+Password for 'https://Deepan2222@github.com':
+D:\Git & GitHub\learning>git config --global user.email "deepanneduchezhiyan@gamil.com"
+
+D:\Git & GitHub\learning>git add .\assignment.html
+
+D:\Git & GitHub\learning>git commit -m "feat: added a file to repo"
+On branch main
+Your branch is based on 'origin/main', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)
+
+nothing to commit, working tree clean
+
+D:\Git & GitHub\learning>git push
+info: please complete authentication in your browser...
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 1.53 KiB | 1.53 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Deepan2222/learning.git
+ * [new branch]      main -> main
+
+D:\Git & GitHub\learning>git add doc.txt
+fatal: pathspec 'doc.txt' did not match any files
+
+D:\Git & GitHub\learning>
